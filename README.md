@@ -14,3 +14,5 @@ Currently in-progress. More resources will be available through Fall 2026.
 **Yuejia Su**, primary GUI developer
 
 **Kevin Stubbs**, integration with fNIRS-Preprocessing
+
+**Androu Abdalmalak**, testing and validation
