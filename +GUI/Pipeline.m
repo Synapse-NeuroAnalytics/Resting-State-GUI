@@ -170,6 +170,11 @@ classdef Pipeline < handle
                     % figure info
                     step.SubfolderFigures = obj.Steps(idx).FigureFolder;
                     step.GenerateFigure   = obj.Steps(idx).GenerateFigures;
+                    if app.HighResCheckbox.Value
+                        step.FigureResolution = 175;
+                    else
+                        step.FigureResolution = 75;
+                    end
     
                     % add step
                     pipeline.AddStep(step);

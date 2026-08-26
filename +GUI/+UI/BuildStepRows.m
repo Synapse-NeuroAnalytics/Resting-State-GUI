@@ -95,8 +95,8 @@ for r = 1:nRows
             banner.Layout.Row = r; 
             banner.Layout.Column = 1;
 
-            bannerGrid = uigridlayout(banner, [1, 3]);
-            bannerGrid.ColumnWidth = {"1x", 140, 70};
+            bannerGrid = uigridlayout(banner, [1, 4]);
+            bannerGrid.ColumnWidth = {"1x", 140, 120, 70};
             bannerGrid.Padding = [8 4 8 4];
             bannerGrid.BackgroundColor = app.StepsScrollPanel.BackgroundColor;
 
@@ -104,14 +104,18 @@ for r = 1:nRows
                 "FontWeight", "bold", "FontSize", 12, "FontColor", [0.20 0.14 0.10]);
             lbl.Layout.Column = 1;
 
+            resCheckbox = uicheckbox(bannerGrid, "Text", "High Resolution Figures", "Value", false, "FontSize", 11);
+            resCheckbox.Layout.Column = 2;
+
             switchLbl = uilabel(bannerGrid, "Text", "Generate All Figures", ...
                 "HorizontalAlignment", "right", "FontSize", 11, "FontColor", [0.20 0.14 0.10]);
-            switchLbl.Layout.Column = 2;
+            switchLbl.Layout.Column = 3;
 
             masterSwitch = uiswitch(bannerGrid, "slider", "Value", "On");
-            masterSwitch.Layout.Column = 3;
+            masterSwitch.Layout.Column = 4;
             masterSwitch.ValueChangedFcn = @(src, event) GUI.Callbacks.GenAllFiguresChanged(app, event);
 
+            app.HighResCheckbox = resCheckbox;
             app.GenAllFigsSwitch = masterSwitch;
 
         case "header"
