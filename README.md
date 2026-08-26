@@ -9,3 +9,8 @@ Requires [fNIRS-Preprocessing](https://github.com/Western-SPRINT/fNIRS-Preproces
 
 ## Documentation
 Currently in-progress. More resources will be available through Fall 2026.
+
+## Acknowledgements
+**Yuejia Su**, primary GUI developer
+
+**Kevin Stubbs**, integration with fNIRS-Preprocessing
