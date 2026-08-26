@@ -112,6 +112,7 @@ steps(end+1) = step("3.8", "Summary Figure", "Preprocessing", false, ...
 
 steps(end+1) = step("3.9", "Connectivity", "Preprocessing", true, ...
     "3-9_Connectivity", [
+    param("Robust", "Use Robust Correlation", "logical", "none", false, {}, "Use robust correlation based on Shevlyakov and Smirnov (2011). Much slower than the default method, but may be desired for final analyses.")
     param("FigureZThresh", "Figure Z-Threshold", "numeric", "positive", 0.5, {}, "Any positive value.", false, false)
     param("FigurepThresh", "Figure p-Threshold", "numeric", "range_0_1", 1, {}, "Range 0-1.", false, false)
     param("FigureqThresh", "Figure q-Threshold", "numeric", "range_0_1", 0.01, {}, "Range 0-1.", false, false)
