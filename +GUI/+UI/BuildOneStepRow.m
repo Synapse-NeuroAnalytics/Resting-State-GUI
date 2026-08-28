@@ -116,7 +116,7 @@ else
                 
                 btn = uibutton(fileGrid, "Text", "Browse", "FontWeight", "bold", "FontSize", 10);
                 btn.Layout.Row = 1; btn.Layout.Column = 2;
-                btn.ButtonPushedFcn = @(src, event) browseForFile(ef);
+                btn.ButtonPushedFcn = @(src, event) browseForFile(ef, param.Options);
                 btn.BackgroundColor = app.StepsScrollPanel.BackgroundColor;
                 btn.FontColor = [0.20 0.14 0.10];
                 ctrl = ef;
@@ -175,8 +175,12 @@ app.StepHandles(i) = struct( ...
     "GenFiguresCheckbox", genFigCb, "OpenFigFolderButton", openFigBtn, ...
     "RunOnlyButton", runOnlyBtn, "RunFromHereButton", runFromBtn, "RunToHereButton", runToBtn);
 
-    function browseForFile(ef)
-        [f, folder] = uigetfile("*.m", "Select function file");
+    function browseForFile(ef, options)
+        if (nargin < 2) || isempty(options)
+            [f, folder] = uigetfile("*.m", "Select function file");
+        else
+            [f, folder] = uigetfile(options{1}.FileSelectType, options{1}.FileSelectText);
+        end
         if ~isequal(f, 0)
             fullP = fullfile(folder, f);
             ef.Value = fullP;
