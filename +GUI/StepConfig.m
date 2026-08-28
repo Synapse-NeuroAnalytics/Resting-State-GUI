@@ -130,6 +130,7 @@ steps(end+1) = step("3.10", "Group Connectivity: Select Datasets", "Preprocessin
 
 steps(end+1) = step("3.11", "Group Connectivity: Figures", "Preprocessing", false, ...
     "3-11_Connectivity-Group-Seed", [
+    param("SensitivityPrecalcPath", "Precalculated Sensitivity Profile (.mat)", "file", "none", '', {struct(FileSelectType="*.mat", FileSelectText="Select precalculated sensitivity file")}, "Leave empty for example data")
     param("DrawChannelLines", "Draw channel lines", "logical", "none", false, {}, "", false, false)
     param("SeedChannelIndices", "Seeds", "", "seeds", [], {}, "Empty or array of positive integers", false, false)
     ], "ConnectivityGroupSeed");

@@ -153,6 +153,12 @@ classdef Pipeline < handle
                                 if isempty(value)
                                     value = 0;
                                 end
+
+                            case "SensitivityPrecalcPath"
+                                if isempty(value)
+                                    % use default if not entered
+                                    continue
+                                end
     
                         end
 
