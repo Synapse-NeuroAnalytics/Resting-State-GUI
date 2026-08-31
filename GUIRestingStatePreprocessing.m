@@ -8,4 +8,30 @@
 % figure/menus/layout exist, which prompts for a new/loaded pipeline and
 % builds the step rows - see +GUI/startup.m.
 
+%% Add the top-level folder to the path for future sessions
+
+% Get folder (might not be pwd)
+[fol,~,~] = fileparts(which(mfilename + ".m"));
+
+% Need to add to path?
+if ~contains(path, fol)
+    % Display
+    fprintf("Adding GUI to path for future sessions: %s\n", fol);
+
+    % Add to path
+    path(path, fol);
+
+    % Try to save this folder to the path permanently
+    try
+        savepath
+    catch
+        warning("MATLAB Path could not be saved. Directories have been added to the path for this session only.\nThe most common solution is to run MATLAB as admin and try agian.")
+    end
+end
+
+% Cleanup
+clear fol
+
+
+%% Start App
 app = GUI.App(); %#ok<NASGU>
