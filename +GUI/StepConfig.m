@@ -89,20 +89,20 @@ steps(end+1) = step("3.4", "Modified Beer-Lambert Law", "Preprocessing", true, .
         "Adjusts the partial pathlength factor using each participant's age.")
     ], "MBLL");
 
-steps(end+1) = step("3.5", "Short Channel Regression", "Preprocessing", false, ...
-    "3-5_SDC-Regression", [
-    param("MaxComponents", "Maximum number of components", "numeric", "positive_int", 6, {}, "Any positive integer.")
-    param("IndependentOxyDeoxy", "Process oxy and deoxy independently", "logical", "none", false, {}, "")
-    param("ParallelPools", "Number of parallel pools", "dropdown", "none", "OFF", {"OFF","2","4","8","12","16","20"}, ...
-        "Number of parallel workers to use. OFF disables parallelization.", false)
-    ], "SDCRegress");
-
-steps(end+1) = step("3.6", "Bandpass Filter", "Preprocessing", false, ...
-    "3-6_Bandpass", [
+steps(end+1) = step("3.5", "Bandpass Filter", "Preprocessing", false, ...
+    "3-5_Bandpass", [
     param("LowCutoff", "Passband lower limit (Hz)", "numeric", "positive", 0.009, {}, "Any positive value.")
     param("HighCutoff", "Passband upper limit (Hz)", "numeric", "bandpass_high", 0.08, {}, ...
         "Any positive value greater than the lower limit.")
     ], "Bandpass");
+
+steps(end+1) = step("3.6", "Short Channel Regression", "Preprocessing", false, ...
+    "3-6_SDC-Regression", [
+    param("MaxComponents", "Maximum number of components", "numeric", "positive_int", 6, {}, "Any positive integer.")
+    param("IndependentOxyDeoxy", "Process oxy and deoxy independently", "logical", "none", false, {}, "")
+    param("ParallelPools", "Number of parallel pools", "dropdown", "none", "OFF", {"OFF","2","4","8","12","16","20"}, ...
+    "Number of parallel workers to use. OFF disables parallelization.", false)
+    ], "SDCRegress");
 
 steps(end+1) = step("3.7", "Calculate Total Haemoglobin", "Preprocessing", true, ...
     "3-7_HbT", GUI.EmptyParam(0), "HbT");
