@@ -51,22 +51,33 @@ steps(end+1) = step("2.3", "Calculate Quality Metrics (SCI/PSP)", "QualityContro
         "Number of parallel workers to use. OFF disables parallelization.", false)
     ], "QCCalculate");
 
-steps(end+1) = step("2.4", "Trim to Cleanest Segment", "QualityControl", false, ...
-    "2-4_QC_Cleanest-Segment", [
-    param("SegmentSeconds", "Segment duration (s)", "numeric", "positive", 300, {}, ...
-        "Any positive value. Duration of the segment to select in seconds.")
-    param("SCIThreshold", "SCI threshold", "numeric", "range_0_1", 0.6, {}, "Range 0-1.")
-    param("PSPThreshold", "PSP threshold", "numeric", "range_0_1", 0.1, {}, "Range 0-1.")
-    param("IgnoreChannelsBelowRatioClean", "Ignore channels with < X% clean samples", "numeric", "range_0_100", 30, {}, "Range 0-100%.")
-    ], "QCTrimSegment");
+% steps(end+1) = step("2.4", "Trim to Cleanest Segment", "QualityControl", false, ...
+%     "2-4_QC_Cleanest-Segment", [
+%     param("SegmentSeconds", "Segment duration (s)", "numeric", "positive", 300, {}, ...
+%         "Any positive value. Duration of the segment to select in seconds.")
+%     param("SCIThreshold", "SCI threshold", "numeric", "range_0_1", 0.6, {}, "Range 0-1.")
+%     param("PSPThreshold", "PSP threshold", "numeric", "range_0_1", 0.1, {}, "Range 0-1.")
+%     param("IgnoreChannelsBelowRatioClean", "Ignore channels with < X% clean samples", "numeric", "range_0_100", 30, {}, "Range 0-100%.")
+%     ], "QCTrimSegment");
+% 
+% steps(end+1) = step("2.5", "Channel Exclusion", "QualityControl", false, ...
+%     "2-5_QC_Channel-Exclusion", [
+%     param("SCIThreshold", "SCI threshold", "numeric", "range_0_1", 0.6, {}, "Range 0-1.")
+%     param("PSPThreshold", "PSP threshold", "numeric", "range_0_1", 0.1, {}, "Range 0-1.")
+%     param("ExcludeChannelsBelowRatioClean", "Exclude channels with < X% clean samples", "numeric", "range_0_100", 60, {}, "Range 0-100%.")
+%     param("tSNRThreshold", "tSNR threshold", "numeric", "positive", 1.5, {}, "Any positive value. Channels below this tSNR are excluded.")
+%     ], "QCExcludeChannels");
 
-steps(end+1) = step("2.5", "Channel Exclusion", "QualityControl", false, ...
-    "2-5_QC_Channel-Exclusion", [
+steps(end+1) = step("2.4", "Select Segment and Prune Channels", "QualityControl", false, ...
+    "2-4_QC_Cleanest-Segment_and_Channel-Exclusion", [
+    param("SegmentSeconds", "Segment duration (s)", "numeric", "positive", 300, {}, ...
+    "Any positive value. Duration of the segment to select in seconds.")
     param("SCIThreshold", "SCI threshold", "numeric", "range_0_1", 0.6, {}, "Range 0-1.")
     param("PSPThreshold", "PSP threshold", "numeric", "range_0_1", 0.1, {}, "Range 0-1.")
-    param("ExcludeChannelsBelowRatioClean", "Exclude channels with < X% clean samples", "numeric", "range_0_100", 60, {}, "Range 0-100%.")
     param("tSNRThreshold", "tSNR threshold", "numeric", "positive", 1.5, {}, "Any positive value. Channels below this tSNR are excluded.")
-    ], "QCExcludeChannels");
+    param("ExcludeChannelsBelowRatioClean", "Minimum % clean samples", "numeric", "range_0_100", 60, {}, "Range 0-100%.")
+    param("PrioratizeSegmentsWithAtLeastOneSDC", "Prioratize retaining at least one SDC", "logical", "none", true, {}, "No effect if the dataset does not contain short channels.", false, false)
+    ], "QCTrimSegmentAndExcludeChannels");
 
 
 %% Phase 3: Preprocessing
