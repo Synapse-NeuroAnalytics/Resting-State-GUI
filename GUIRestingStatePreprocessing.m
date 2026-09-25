@@ -33,5 +33,9 @@ end
 clear fol
 
 
+%% Warn if there are updates (but do not automatically apply)
+GUI.CheckUpdates;
+
+
 %% Start App
 app = GUI.App(); %#ok<NASGU>
