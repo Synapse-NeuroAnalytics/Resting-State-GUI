@@ -26,5 +26,5 @@ try
     % Complete
     fprintf("Complete!\n")
 catch
-    warningTraceless("Could not check GitHub for updates. Either the install didn't use Git or you are not connected to the internet.")
+    warning("Could not check GitHub for updates. Either the install didn't use Git or you are not connected to the internet.")
 end
