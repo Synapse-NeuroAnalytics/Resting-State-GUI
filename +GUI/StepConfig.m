@@ -116,7 +116,7 @@ steps(end+1) = step("3.6", "Short Channel Regression", "Preprocessing", false, .
     ], "SDCRegress");
 
 steps(end+1) = step("3.7", "Calculate Total Haemoglobin", "Preprocessing", true, ...
-    "3-7_HbT", GUI.EmptyParam(0), "HbT");
+    "3-7_CalculateHbT", GUI.EmptyParam(0), "CalculateHbT");
 
 steps(end+1) = step("3.8", "Summary Figure", "Preprocessing", false, ...
     "3-8_Summary", GUI.EmptyParam(0), "SummaryFigure");
