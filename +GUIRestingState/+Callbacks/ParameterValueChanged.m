@@ -25,7 +25,7 @@ GUIRestingState.Utils.Log(sprintf("Step %s: parameter '%s' changed to %s.", ...
 GUIRestingState.Utils.MarkDownstreamDirty(app);
 
 if strlength(app.Pipeline.PipelinePath) > 0
-    app.Pipeline.Save(app.Pipeline.PipelinePath);
+    app.Pipeline.Save(app.Pipeline.PipelinePath, app);
 end
 end
 

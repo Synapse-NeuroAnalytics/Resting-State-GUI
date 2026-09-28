@@ -104,7 +104,7 @@ for r = 1:nRows
                 "FontWeight", "bold", "FontSize", 12, "FontColor", [0.20 0.14 0.10]);
             lbl.Layout.Column = 1;
 
-            resCheckbox = uicheckbox(bannerGrid, "Text", "High Resolution Figures", "Value", false, "FontSize", 11);
+            resCheckbox = uicheckbox(bannerGrid, "Text", "High Resolution Figures", "Value", app.Pipeline.HighResFigures, "FontSize", 11);
             resCheckbox.Layout.Column = 2;
 
             switchLbl = uilabel(bannerGrid, "Text", "Generate All Figures", ...

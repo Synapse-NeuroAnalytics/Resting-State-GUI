@@ -11,6 +11,6 @@ end
 app.Pipeline.UIState.Position = app.UIFigure.Position;
 app.Pipeline.Overwrite = strcmp(app.OverwriteSwitch.Value, "On");
 
-app.Pipeline.Save(app.Pipeline.PipelinePath);
+app.Pipeline.Save(app.Pipeline.PipelinePath, app);
 GUIRestingState.Utils.Log(sprintf("Pipeline saved to %s.", app.Pipeline.PipelinePath), app);
 end

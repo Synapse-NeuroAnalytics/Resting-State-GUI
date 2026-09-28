@@ -12,6 +12,7 @@ classdef Pipeline < handle
 
         % Global configuration
         Overwrite           logical = true
+        HighResFigures      logical = false
 
         % Pipeline steps
         Steps               struct = struct([])
@@ -57,6 +58,9 @@ classdef Pipeline < handle
                 indices (1,:) double
                 app = []
             end
+
+            % Update high res setting
+            obj.HighResFigures = app.HighResCheckbox.Value;
 
             % Stop/Continue bookkeeping - reset flag, lock the Run buttons,
             % and guarantee everything is restored even if a step errors
@@ -176,7 +180,7 @@ classdef Pipeline < handle
                     % figure info
                     step.SubfolderFigures = obj.Steps(idx).FigureFolder;
                     step.GenerateFigure   = obj.Steps(idx).GenerateFigures;
-                    if app.HighResCheckbox.Value
+                    if obj.HighResFigures
                         step.FigureResolution = 175;
                     else
                         step.FigureResolution = 75;
@@ -234,11 +238,16 @@ classdef Pipeline < handle
             end
         end
 
-        function Save(obj, filepath)
+        function Save(obj, filepath, app)
             % Saves pipeline configuration to a .mat file.
             arguments
                 obj
                 filepath (1,1) string
+                app = []
+            end
+
+            if ~isempty(app)
+                obj.HighResFigures = app.HighResCheckbox.Value;
             end
 
             pipeline = obj; %#ok<NASGU>

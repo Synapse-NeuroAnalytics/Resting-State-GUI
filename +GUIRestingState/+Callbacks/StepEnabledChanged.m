@@ -7,6 +7,6 @@ GUIRestingState.Utils.Log(sprintf("Step %s %s.", app.Pipeline.Steps(stepIndex).I
 GUIRestingState.Utils.MarkDownstreamDirty(app);
 
 if strlength(app.Pipeline.PipelinePath) > 0
-    app.Pipeline.Save(app.Pipeline.PipelinePath);
+    app.Pipeline.Save(app.Pipeline.PipelinePath, app);
 end
 end
