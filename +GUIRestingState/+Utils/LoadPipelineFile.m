@@ -87,6 +87,11 @@ if ~isempty(missing)
     candidate.OutputPath      = updatedPaths.OutputPath;
 end
 
+% Set all NeedsRerun to false
+for i = 1:numel(candidate.Steps)
+    candidate.Steps(i).NeedsRerun = false;
+end
+
 candidate.PipelinePath = filepath;
 loaded = candidate;
 end
