@@ -117,22 +117,30 @@ steps(end+1) = step("3.6", "Short Channel Regression", "Preprocessing", false, .
     "Number of parallel workers to use. OFF disables parallelization.", false)
     ], "SDCRegress");
 
-steps(end+1) = step("3.7", "Calculate Total Haemoglobin", "Preprocessing", true, ...
-    "3-7_CalculateHbT", GUIRestingState.EmptyParam(0), "CalculateHbT");
+steps(end+1) = step("3.7", "Prewhiten", "Preprocessing", false, ...
+    "3-7_Prewhiten", [
+    param("MaxSeconds", "Maximum model duration (seconds)", "numeric", "positive", 5, {}, "Any positive value.")
+    param("DeleteArtifact", "Trim first few seconds", "logical", "none", true, {}, "")
+    param("ParallelPools", "Number of parallel pools", "dropdown", "none", "OFF", {"OFF","2","4","8","12","16","20"}, ...
+    "Number of parallel workers to use. OFF disables parallelization.", false)
+    ], "Prewhiten");
 
-steps(end+1) = step("3.8", "Summary Figure", "Preprocessing", false, ...
-    "3-8_Summary", GUIRestingState.EmptyParam(0), "SummaryFigure");
+steps(end+1) = step("3.8", "Calculate Total Haemoglobin", "Preprocessing", true, ...
+    "3-8_CalculateHbT", GUIRestingState.EmptyParam(0), "CalculateHbT");
 
-steps(end+1) = step("3.9", "Connectivity", "Preprocessing", true, ...
-    "3-9_Connectivity", [
+steps(end+1) = step("3.9", "Summary Figure", "Preprocessing", false, ...
+    "3-9_Summary", GUIRestingState.EmptyParam(0), "SummaryFigure");
+
+steps(end+1) = step("3.10", "Connectivity", "Preprocessing", true, ...
+    "3-10_Connectivity", [
     param("Robust", "Use Robust Correlation", "logical", "none", false, {}, "Use robust correlation based on Shevlyakov and Smirnov (2011). Much slower than the default method, but may be desired for final analyses.")
     param("FigureZThresh", "Figure Z-Threshold", "numeric", "positive", 0.5, {}, "Any positive value.", false, false)
     param("FigurepThresh", "Figure p-Threshold", "numeric", "range_0_1", 1, {}, "Range 0-1.", false, false)
     param("FigureqThresh", "Figure q-Threshold", "numeric", "range_0_1", 0.01, {}, "Range 0-1.", false, false)
     ], "Connectivity");
 
-steps(end+1) = step("3.10", "Group Connectivity: Select Datasets", "Preprocessing", true, ...
-    "3-10_Connectivity-Group", [
+steps(end+1) = step("3.11", "Group Connectivity: Select Datasets", "Preprocessing", true, ...
+    "3-11_Connectivity-Group", [
     param("MinShortChannels", "Min short channels", "numeric", "non_negative_int", 0, {}, "")
     param("MinLongChannels", "Min long channels", "numeric", "non_negative_int", 0, {}, "")
     param("MinDurationSeconds", "Min duration (s)", "numeric", "positive", 300, {}, "")
@@ -141,8 +149,8 @@ steps(end+1) = step("3.10", "Group Connectivity: Select Datasets", "Preprocessin
     param("FigureqThresh", "Figure q-Threshold", "numeric", "range_0_1", 1, {}, "Range 0-1.", false, false)
     ], "ConnectivityGroup");
 
-steps(end+1) = step("3.11", "Group Connectivity: Figures", "Preprocessing", false, ...
-    "3-11_Connectivity-Group-Seed", [
+steps(end+1) = step("3.12", "Group Connectivity: Figures", "Preprocessing", false, ...
+    "3-12_Connectivity-Group-Seed", [
     param("SensitivityPrecalcPath", "Precalculated Sensitivity Profile (.mat)", "file", "none", '', {struct(FileSelectType="*.mat", FileSelectText="Select precalculated sensitivity file")}, "Leave empty for example data")
     param("DrawChannelLines", "Draw channel lines", "logical", "none", false, {}, "", false, false)
     param("SeedChannelIndices", "Seeds", "", "seeds", [], {}, "Empty or array of positive integers", false, false)
