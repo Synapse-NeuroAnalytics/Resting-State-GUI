@@ -6,6 +6,9 @@ try
     folder = fileparts(which("GUIRestingState.m"));
     repo = gitrepo(folder);
 
+    % Fetch any changes
+    repo.fetch;
+
     % Display
     fprintf("Looking for updates on GitHub...\n")
     indCurrent = find(strcmp(repo.LastCommit.ID, repo.log.ID));
@@ -19,8 +22,7 @@ try
         end
     end
 
-    % Fetch and pull
-    repo.fetch;
+    % Pull changes
     repo.pull;
 
     % Complete
