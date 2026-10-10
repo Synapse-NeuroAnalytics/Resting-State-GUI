@@ -22,6 +22,7 @@ try
     candidate = GUIRestingState.Pipeline.Load(filepath);
 catch ME
     uialert(app.UIFigure, "Could not load pipeline: " + ME.message, "Load failed");
+    uistack(app.UIFigure, 'top');
     return
 end
 
@@ -64,6 +65,7 @@ if ~isempty(missing)
     if choice == "Abort"
         GUIRestingState.Utils.Log("Load pipeline aborted (missing paths).", app);
         loaded = [];
+        uistack(app.UIFigure, 'top');
         return
     end
 
@@ -79,6 +81,7 @@ if ~isempty(missing)
     if isempty(updatedPaths)
         GUIRestingState.Utils.Log("Load pipeline aborted (paths not redefined).", app);
         loaded = [];
+        uistack(app.UIFigure, 'top');
         return
     end
 
@@ -94,4 +97,6 @@ end
 
 candidate.PipelinePath = filepath;
 loaded = candidate;
+
+uistack(app.UIFigure, 'top');
 end
