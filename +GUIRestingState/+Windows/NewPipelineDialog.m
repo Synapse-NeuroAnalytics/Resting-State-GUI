@@ -227,6 +227,9 @@ uiwait(fig);
 
             uiresume(fig);
             delete(fig);
+
+            uistack(parentApp.UIFigure, 'top');
+            
             return
         end
 
@@ -256,6 +259,7 @@ uiwait(fig);
         result = p;
         uiresume(fig);
         delete(fig);
+        uistack(parentApp.UIFigure, 'top');
     end
 end
 
